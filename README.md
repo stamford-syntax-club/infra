@@ -1,25 +1,48 @@
 # Infrastructure Configurations
 
 ## Stamford Center
+##### Note
+- this storage system uses mounted volume on host machine (named as `data`)\
+- remove folder `data` to empty the storage system
 ### Getting started
 Start Dev Environment
 ```
 docker-compose -f stamfordcenter/docker-compose.dev.yaml up -d
 ```
+Stop Dev Environment
+```
+docker-compose -f stamfordcenter/docker-compose.dev.yaml down
+```
+Create new S3 Bucket
+```
+aws s3 mb s3://<bucket-name> --endpoint-url http://localhost:8333
+```
+See all buckets
+```
+aws s3 ls --endpoint-url http://localhost:8333
+```
+Upload file to S3
+```
+aws s3 cp <file-path> s3://<bucket-name>/<desired-path> --endpoint-url http://localhost:8333
+```
+Retrieve file from S3
+```
+aws s3 cp s3://<bucket-name>/<target-path> <desired-path> --endpoint-url http://localhost:8333
+```
+
 
 ### Services
 #### Prometheus
 - This service runs the Prometheus monitoring tool.
 - It is responsible for collecting and storing metrics from different components of the SeaweedFS setup.
-- The metrics can be accessed through the exposed port 9000.
+- Access via `http://localhost:9000`
 
 #### S3
 - This service runs the SeaweedFS S3 server.
 - The S3 server provides an Amazon S3-compatible interface to interact with 
 SeaweedFS.
-- It exposes ports 8333 for HTTP communication.
 - The Prometheus metrics are exposed on port 9327.
-- It depends on s3-master, s3-volume, and s3-filer services to function properly.
+- Access via `http://localhost:8333`
 
 #### S3-master
 - This service runs the SeaweedFS Master server.

@@ -32,23 +32,23 @@ services:
       - ./data/master:/data
     networks:
       - stamford
- 
+
   s3-volume:
-    image: chrislusf/seaweedfs 
+    image: chrislusf/seaweedfs
     ports:
-      - 8080:8080 # http
+      - 8181:8181 # http
       - 18080:18080 # gRPC
       - 9325:9325 # prometheus
-    command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8080  -metricsPort=9325'
+    command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8181 -metricsPort=9325'
     depends_on:
       - s3-master
     volumes:
       - ./data/volume:/data
     networks:
-    - stamford
+      - stamford
 
   s3-filer:
-    image: chrislusf/seaweedfs 
+    image: chrislusf/seaweedfs
     ports:
       - 8888:8888 # http
       - 18888:18888 # gRPC
@@ -65,7 +65,7 @@ services:
       - stamford
 
   s3:
-    image: chrislusf/seaweedfs 
+    image: chrislusf/seaweedfs
     ports:
       - 8333:8333 # http
       - 9327:9327 # prometheus
