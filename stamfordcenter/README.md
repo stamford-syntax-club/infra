@@ -51,7 +51,7 @@ SeaweedFS.
 #### S3-volume
 - This service runs the SeaweedFS Volume server.
 - The volume server stores the actual file data and is managed by the master server.
-- It exposes ports 8080 for HTTP and 18080 for gRPC communication.
+- It exposes ports 8181 for HTTP and 18080 for gRPC communication.
 - The Prometheus metrics are exposed on port 9325.
 
 #### S3-filer

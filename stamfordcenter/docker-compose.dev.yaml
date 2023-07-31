@@ -24,9 +24,9 @@ services:
   s3-master:
     image: chrislusf/seaweedfs
     ports:
-      - 9333:9333 # http
-      - 19333:19333 # gRPC
-      - 9324:9324 # prometheus metrics
+      - 9333:9333 
+      - 19333:19333 
+      - 9324:9324
     command: "master -ip=s3-master -ip.bind=0.0.0.0 -metricsPort=9324"
     volumes:
       - ./data/master:/data
@@ -36,9 +36,9 @@ services:
   s3-volume:
     image: chrislusf/seaweedfs
     ports:
-      - 8181:8181 # http
-      - 18080:18080 # gRPC
-      - 9325:9325 # prometheus
+      - 8181:8181 
+      - 18080:18080 
+      - 9325:9325 
     command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8181 -metricsPort=9325'
     depends_on:
       - s3-master
@@ -50,9 +50,9 @@ services:
   s3-filer:
     image: chrislusf/seaweedfs
     ports:
-      - 8888:8888 # http
-      - 18888:18888 # gRPC
-      - 9326:9326 # prometheus
+      - 8888:8888 
+      - 18888:18888
+      - 9326:9326 
     command: 'filer -master="s3-master:9333" -ip.bind=0.0.0.0 -metricsPort=9326'
     tty: true
     stdin_open: true
@@ -67,8 +67,8 @@ services:
   s3:
     image: chrislusf/seaweedfs
     ports:
-      - 8333:8333 # http
-      - 9327:9327 # prometheus
+      - 8333:8333 
+      - 9327:9327 
     command: 's3 -filer="s3-filer:8888" -ip.bind=0.0.0.0 -metricsPort=9327'
     depends_on:
       - s3-master
@@ -80,7 +80,7 @@ services:
   s3-webdav:
     image: chrislusf/seaweedfs
     ports:
-      - 7333:7333 # http
+      - 7333:7333
     command: 'webdav -filer="s3-filer:8888"'
     depends_on:
       - s3-master
