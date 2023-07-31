@@ -61,10 +61,8 @@ SeaweedFS.
 - The filer server provides the file system-like interface to access the data stored in the volume servers.
 - It exposes ports 8888 for HTTP and 18888 for gRPC communication.
 - The Prometheus metrics are exposed on port 9326.
-- It depends on s3-master and s3-volume services to function properly.
 
 #### S3-webdav:
 - This service runs the SeaweedFS WebDAV server.
 - The WebDAV server provides a WebDAV-compatible interface to access the data stored in SeaweedFS.
 - It exposes port 7333 for HTTP communication.
-- It depends on s3-master, s3-volume, and s3-filer services to function properly.
