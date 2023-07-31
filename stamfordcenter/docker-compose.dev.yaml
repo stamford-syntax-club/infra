@@ -1,0 +1,90 @@
+version: "3.8"
+networks:
+  stamford:
+
+services:
+  # frontend
+
+  # api-gateway
+
+  # backend
+
+  # monitoring
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    ports:
+      - 9000:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - stamford
+
+  #### Below are the services necessary to bootstrap S3 for development
+  s3-master:
+    image: chrislusf/seaweedfs
+    ports:
+      - 9333:9333 # http
+      - 19333:19333 # gRPC
+      - 9324:9324 # prometheus metrics
+    command: "master -ip=s3-master -ip.bind=0.0.0.0 -metricsPort=9324"
+    volumes:
+      - ./data/master:/data
+    networks:
+      - stamford
+ 
+  s3-volume:
+    image: chrislusf/seaweedfs 
+    ports:
+      - 8080:8080 # http
+      - 18080:18080 # gRPC
+      - 9325:9325 # prometheus
+    command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8080  -metricsPort=9325'
+    depends_on:
+      - s3-master
+    volumes:
+      - ./data/volume:/data
+    networks:
+    - stamford
+
+  s3-filer:
+    image: chrislusf/seaweedfs 
+    ports:
+      - 8888:8888 # http
+      - 18888:18888 # gRPC
+      - 9326:9326 # prometheus
+    command: 'filer -master="s3-master:9333" -ip.bind=0.0.0.0 -metricsPort=9326'
+    tty: true
+    stdin_open: true
+    depends_on:
+      - s3-master
+      - s3-volume
+    volumes:
+      - ./data/filer:/data
+    networks:
+      - stamford
+
+  s3:
+    image: chrislusf/seaweedfs 
+    ports:
+      - 8333:8333 # http
+      - 9327:9327 # prometheus
+    command: 's3 -filer="s3-filer:8888" -ip.bind=0.0.0.0 -metricsPort=9327'
+    depends_on:
+      - s3-master
+      - s3-volume
+      - s3-filer
+    networks:
+      - stamford
+
+  s3-webdav:
+    image: chrislusf/seaweedfs
+    ports:
+      - 7333:7333 # http
+    command: 'webdav -filer="s3-filer:8888"'
+    depends_on:
+      - s3-master
+      - s3-volume
+      - s3-filer
+    networks:
+      - stamford
