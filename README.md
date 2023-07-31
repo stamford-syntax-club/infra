@@ -23,7 +23,7 @@ aws s3 ls --endpoint-url http://localhost:8333
 ```
 Upload file to S3
 ```
-aws s3 cp <file-path> s3://<bucket-name>/<desired-path> --endpoint-url http://localhost:8333
+aws s3 cp <target-path> s3://<bucket-name>/<desired-path> --endpoint-url http://localhost:8333
 ```
 Retrieve file from S3
 ```
