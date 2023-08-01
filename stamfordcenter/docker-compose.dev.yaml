@@ -9,9 +9,10 @@ services:
 
   # backend
 
-  # monitoring
+  #### Below are the services for monitoring & alerts
   prometheus:
-    image: prom/prometheus:v2.21.0
+    image: prom/prometheus
+    restart: on-failure
     ports:
       - 9000:9090
     volumes:
@@ -20,9 +21,29 @@ services:
     networks:
       - stamford
 
+  alertmanager:
+    image: prom/alertmanager
+    restart: on-failure
+    volumes:
+      - ./prometheus/alertmanager.yml:/etc/prometheus/alertmanager.yml
+    command: --config.file=/etc/prometheus/alertmanager.yml
+    ports:
+      - 9093:9093
+    networks:
+      - stamford
+
+  discord-alert:
+    image: benjojo/alertmanager-discord
+    restart: on-failure
+    environment:
+      - DISCORD_WEBHOOK=${DISCORD_WEBHOOK_URL}
+    networks:
+      - stamford
+
   #### Below are the services necessary to bootstrap S3 for development
   s3-master:
     image: chrislusf/seaweedfs
+    restart: on-failure
     ports:
       - 9333:9333 
       - 19333:19333 
@@ -35,6 +56,7 @@ services:
 
   s3-volume:
     image: chrislusf/seaweedfs
+    restart: on-failure
     ports:
       - 8181:8181 
       - 18080:18080 
@@ -49,6 +71,7 @@ services:
 
   s3-filer:
     image: chrislusf/seaweedfs
+    restart: on-failure
     ports:
       - 8888:8888 
       - 18888:18888
@@ -66,6 +89,7 @@ services:
 
   s3:
     image: chrislusf/seaweedfs
+    restart: on-failure
     ports:
       - 8333:8333 
       - 9327:9327 
@@ -79,6 +103,7 @@ services:
 
   s3-webdav:
     image: chrislusf/seaweedfs
+    restart: on-failure
     ports:
       - 7333:7333
     command: 'webdav -filer="s3-filer:8888"'
