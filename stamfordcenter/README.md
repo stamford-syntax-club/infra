@@ -2,14 +2,18 @@
 ### Note
 - this storage system uses mounted volume on host machine (named as `data`)\
 - remove folder `data` to empty the storage system
+
+## Prerequisites
+- docker
+- awscli - then type `aws configure` in the terminal and enter anything
 ## Getting started
 Start Dev Environment
 ```
-docker-compose -f stamfordcenter/docker-compose.dev.yaml up -d
+docker-compose -f docker-compose.dev.yaml up -d
 ```
 Stop Dev Environment
 ```
-docker-compose -f stamfordcenter/docker-compose.dev.yaml down
+docker-compose -f docker-compose.dev.yaml down
 ```
 Create new S3 Bucket
 ```
@@ -30,6 +34,7 @@ aws s3 cp s3://<bucket-name>/<target-path> <desired-path> --endpoint-url http://
 
 
 ## Services
+![](./images/B28CD300F40E27154FB0B3989A7C8672CBB2A08C.png)
 #### Prometheus
 - This service runs the Prometheus monitoring tool.
 - It is responsible for collecting and storing metrics from different components of the SeaweedFS setup.

@@ -27,7 +27,7 @@ services:
       - 9333:9333 
       - 19333:19333 
       - 9324:9324
-    command: "master -ip=s3-master -ip.bind=0.0.0.0 -metricsPort=9324"
+    command: "master -ip=s3-master -ip.bind=0.0.0.0 -volumePreallocate=false -metricsPort=9324"
     volumes:
       - ./data/master:/data
     networks:
