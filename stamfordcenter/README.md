@@ -105,18 +105,18 @@ SeaweedFS.
 ## Bounded Ports
 | PORT  | SERVICE                                       |
 |------:|:---------------------------------------------|
+| 7333  | S3-webdav service (SeaweedFS WebDAV server)  |
+| 8181  | S3-volume service (SeaweedFS Volume server - HTTP API) |
 | 8333  | S3 service (SeaweedFS S3 server)             |
+| 8888  | S3-filer service (SeaweedFS Filer server - HTTP API) |
 | 9000  | Prometheus service                           |
 | 9093  | AlertManager service                         |
 | 9094  | Discord-Alert service (Internal)             |
-| 7333  | S3-webdav service (SeaweedFS WebDAV server)  |
-| 8888  | S3-filer service (SeaweedFS Filer server - HTTP API) |
-| 18888 | S3-filer service (SeaweedFS Filer server - gRPC communication) |
-| 8181  | S3-volume service (SeaweedFS Volume server - HTTP API) |
-| 18080 | S3-volume service (SeaweedFS Volume server - gRPC communication) |
-| 9333  | S3-master service (SeaweedFS Master server - HTTP API) |
-| 19333 | S3-master service (SeaweedFS Master server - gRPC communication) |
-| 9327  | S3 service (SeaweedFS S3 server - Prometheus metrics) |
 | 9324  | S3-master service (SeaweedFS Master server - Prometheus metrics) |
 | 9325  | S3-volume service (SeaweedFS Volume server - Prometheus metrics) |
 | 9326  | S3-filer service (SeaweedFS Filer server - Prometheus metrics) |
+| 9327  | S3 service (SeaweedFS S3 server - Prometheus metrics) |
+| 9333  | S3-master service (SeaweedFS Master server - HTTP API) |
+| 18080 | S3-volume service (SeaweedFS Volume server - gRPC communication) |
+| 18888 | S3-filer service (SeaweedFS Filer server - gRPC communication) |
+| 19333 | S3-master service (SeaweedFS Master server - gRPC communication) |
