@@ -12,3 +12,12 @@ scrape_configs:
           - "s3-volume:9325"
           - "s3-filer:9326"
           - "s3:9327"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
+
+rule_files:
+  - "rules.yml"

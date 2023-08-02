@@ -1,0 +1,16 @@
+groups:
+  - name: storage.rules
+    rules:
+      - record: remaining_storage_gb
+        expr: absent(SeaweedFS_volumeServer_resource{type="free"}) or (SeaweedFS_volumeServer_resource{type="free"} / 1073741824)
+
+  - name: alerts.rules
+    rules:
+      - alert: LowRemainingStorage
+        expr: remaining_storage_gb < 2
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Low remaining storage"
+          description: "The remaining storage on SeaweedFS volume is below 2GB."
