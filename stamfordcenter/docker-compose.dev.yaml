@@ -3,12 +3,22 @@ networks:
   stamford:
 
 services:
-  # frontend
-  frontend:
-    image: lxkas/stamfordcenter-frontend
+
+  haproxy:
+    image: haproxy
     restart: always
     ports:
-      - 80:3000
+      - 443:443
+      - 80:80
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy
+    networks:
+      - stamford
+
+  # frontend
+  frontend:
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:e6420ffb88d4c170af0ae691079f37be3b7b7e0c
+    restart: always
     networks:
       - stamford
 
