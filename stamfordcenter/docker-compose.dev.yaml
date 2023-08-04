@@ -1,20 +1,10 @@
 version: "3.8"
 networks:
   stamford:
+    external: true
+    name: haproxy_stamford
 
 services:
-
-  haproxy:
-    image: haproxy
-    restart: always
-    ports:
-      - 443:443
-      - 80:80
-    volumes:
-      - ./haproxy:/usr/local/etc/haproxy
-    networks:
-      - stamford
-
   # frontend
   frontend:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:e6420ffb88d4c170af0ae691079f37be3b7b7e0c
@@ -22,111 +12,4 @@ services:
     networks:
       - stamford
       
-  # api-gateway
-
   # backend
-
-  #### Below are the services for monitoring & alerts
-  prometheus:
-    image: prom/prometheus
-    restart: on-failure
-    ports:
-      - 9000:9090
-    volumes:
-      - ./prometheus:/etc/prometheus
-    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
-    networks:
-      - stamford
-
-  alertmanager:
-    image: prom/alertmanager
-    restart: on-failure
-    volumes:
-      - ./prometheus/alertmanager.yml:/etc/prometheus/alertmanager.yml
-    command: --config.file=/etc/prometheus/alertmanager.yml
-    ports:
-      - 9093:9093
-    networks:
-      - stamford
-
-  discord-alert:
-    image: benjojo/alertmanager-discord
-    restart: on-failure
-    environment:
-      - DISCORD_WEBHOOK=${DISCORD_WEBHOOK_URL}
-    networks:
-      - stamford
-
-  #### Below are the services necessary to bootstrap S3 for development
-  s3-master:
-    image: chrislusf/seaweedfs
-    restart: on-failure
-    ports:
-      - 9333:9333 
-      - 19333:19333 
-      - 9324:9324
-    command: "master -ip=s3-master -ip.bind=0.0.0.0  -volumeSizeLimitMB=5 -volumePreallocate=false -metricsPort=9324 -mdir=/data"
-    volumes:
-      - ./data/master:/data
-    networks:
-      - stamford
-
-  s3-volume:
-    image: chrislusf/seaweedfs
-    restart: on-failure
-    ports:
-      - 8181:8181 
-      - 18080:18080 
-      - 9325:9325 
-    command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8181 -max=0 -metricsPort=9325 -dir=/data'
-    depends_on:
-      - s3-master
-    volumes:
-      - ./data/volume:/data
-    networks:
-      - stamford
-
-  s3-filer:
-    image: chrislusf/seaweedfs
-    restart: on-failure
-    ports:
-      - 8888:8888 
-      - 18888:18888
-      - 9326:9326 
-    command: 'filer -master="s3-master:9333" -ip.bind=0.0.0.0 -metricsPort=9326 -defaultStoreDir=/data'
-    tty: true
-    stdin_open: true
-    depends_on:
-      - s3-master
-      - s3-volume
-    volumes:
-      - ./data/filer:/data
-    networks:
-      - stamford
-
-  s3:
-    image: chrislusf/seaweedfs
-    restart: on-failure
-    ports:
-      - 8333:8333 
-      - 9327:9327 
-    command: 's3 -filer="s3-filer:8888" -ip.bind=0.0.0.0 -metricsPort=9327'
-    depends_on:
-      - s3-master
-      - s3-volume
-      - s3-filer
-    networks:
-      - stamford
-
-  s3-webdav:
-    image: chrislusf/seaweedfs
-    restart: on-failure
-    ports:
-      - 7333:7333
-    command: 'webdav -filer="s3-filer:8888"'
-    depends_on:
-      - s3-master
-      - s3-volume
-      - s3-filer
-    networks:
-      - stamford
