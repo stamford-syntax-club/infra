@@ -25,3 +25,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
           title: "[AUTOMATIC] - Deployment Request from ${{ github.actor }}"
+          assignee: ${{ github.actor }}
+          reviewer: SSC-Platform
