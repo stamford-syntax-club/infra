@@ -26,4 +26,4 @@ jobs:
           target_branch: main
           title: "[AUTOMATIC] - Deployment Request from ${{ github.actor }}"
           assignee: ${{ github.actor }}
-          reviewer: SSC-Platform
+          reviewer: stamford-syntax-club/ssc-platform
