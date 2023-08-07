@@ -6,6 +6,9 @@ on:
     branches:
       - "deploy/**"
 
+env:
+  BRANCH_NAME: ${{ github.head_ref }}
+
 jobs:
   pr:
     name: Open Pull Request
@@ -18,9 +21,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          branch: ${{ github.ref_name }}
-          base: main
-          title: test create pr with pipeline
-          body: pr with pipeline
+        run: |
+          PAYLOAD=$(cat <<EOF
+            {
+              "title": "Title of my PR",
+              "body": "Automated PR to ...",
+              "head": "${BRANCH_NAME}",
+              "base": "main"
+            }
+          EOF
+          )
+          curl https://api.github.com/repos/stamford-syntax-club/infra/pulls \
+            --header "Authorization: token ${ TOKEN }" \
+            -H "Content-Type:application/json" \
+            -d "$PAYLOAD"
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
