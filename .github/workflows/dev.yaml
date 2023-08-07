@@ -23,6 +23,4 @@ jobs:
             --header "Authorization: token ${{ secrets.WORKFLOW_TOKEN }}" \
             -X POST \
             -H "Content-Type:application/json" \
-            -d "$PAYLOAD" { "title": "Title of my PR", "body": "Automated PR to ...", "head": "${{ github.head_ref }}", "base": "main" }
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -d '{ "title": "Title of my PR", "body": "Automated PR to ...", "head": "${{ github.head_ref }}", "base": "main" }'
