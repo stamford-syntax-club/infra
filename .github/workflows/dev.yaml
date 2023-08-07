@@ -21,6 +21,5 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           branch: ${{ github.ref_name }}
-          base: main
           title: test create pr with pipeline
           body: pr with pipeline
