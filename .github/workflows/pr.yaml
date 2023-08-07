@@ -1,4 +1,4 @@
-name: Dev Deployment
+name: Create Deployment PR
 
 # Run this pipeline to create PR whenever branch deploy/<...>  is pushed
 on:
@@ -24,4 +24,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
-          allow_no_diff: true
+          title: "[AUTOMATIC] - Deployment Request from ${{ github.actor }}"
