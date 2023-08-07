@@ -20,5 +20,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
+          base: main
           title: test create pr with pipeline
           body: pr with pipeline
