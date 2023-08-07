@@ -32,7 +32,7 @@ jobs:
           EOF
           )
           curl https://api.github.com/repos/stamford-syntax-club/infra/pulls \
-            --header "Authorization: token ${ TOKEN }" \
+            --header "Authorization: token ${{ secrets.WORKFLOW_TOKEN }}" \
             -H "Content-Type:application/json" \
             -d "$PAYLOAD"
         env:
