@@ -19,18 +19,10 @@ jobs:
 
       - name: Create Pull Request
         run: |
-          PAYLOAD=$(cat <<EOF
-            {
-              "title": "Title of my PR",
-              "body": "Automated PR to ...",
-              "head": "${{ github.head_ref }}",
-              "base": "main"
-            }
-          EOF
-          )
           curl https://api.github.com/repos/stamford-syntax-club/infra/pulls \
             --header "Authorization: token ${{ secrets.WORKFLOW_TOKEN }}" \
+            -X POST \
             -H "Content-Type:application/json" \
-            -d "$PAYLOAD"
+            -d "$PAYLOAD" { "title": "Title of my PR", "body": "Automated PR to ...", "head": "${{ github.head_ref }}", "base": "main" }
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
