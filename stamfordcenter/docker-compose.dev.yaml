@@ -12,7 +12,7 @@ services:
       - stamford
       
   backend:
-    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:be033333cf1c7946c4572538553a916131f770b6
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:5f93e025fd7f8ff47fe21df8a3a9a19f4e72955f
     networks:
       - stamford
     ports:
@@ -21,3 +21,6 @@ services:
       - PORT=${PORT}
       - S3_ENDPOINT=${S3_ENDPOINT}
       - MONGODB_URI=${MONGODB_URI}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
