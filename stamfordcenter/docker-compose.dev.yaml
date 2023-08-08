@@ -5,11 +5,19 @@ networks:
     name: haproxy_stamford
 
 services:
-  # frontend
   frontend:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:68a487adcb05da2e27e694210ecf264c8c538874
     restart: always
     networks:
       - stamford
       
-  # backend
+  backend:
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:be033333cf1c7946c4572538553a916131f770b6
+    networks:
+      - stamford
+    ports:
+      - 8080:${PORT}
+    environment:
+      - PORT=${PORT}
+      - S3_ENDPOINT=${S3_ENDPOINT}
+      - MONGODB_URI=${MONGODB_URI}
