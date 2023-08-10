@@ -12,7 +12,7 @@ services:
       - stamford
       
   backend:
-    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:4b678f828ad3e5bda533261254037d47c0012c28
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:7b095a854deb8915a53956aa01bcf6896a14c591
     networks:
       - stamford
     ports:
