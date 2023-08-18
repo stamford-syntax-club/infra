@@ -12,6 +12,7 @@ scrape_configs:
           - "s3-volume:9325"
           - "s3-filer:9326"
           - "s3:9327"
+          - "node-exporter:9100"
 
 alerting:
   alertmanagers:
