@@ -11,3 +11,6 @@ docker compose -f prometheus/docker-compose.dev.yaml up -d
 
 # start stamford center services
 docker compose -f stamfordcenter/docker-compose.dev.yaml up -d
+
+# start onboarding docs services
+docker compose -f onboarding/docker-compose.dev.yaml up -d
