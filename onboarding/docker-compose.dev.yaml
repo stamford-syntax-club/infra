@@ -9,7 +9,7 @@ services:
     image: ghcr.io/stamford-syntax-club/onboarding-basics:58c8e85b0c1ce25b6a1d90b9e65cfede4f538479
     restart: on-failure
     expose:
-      - 3000
+      - 80
     networks:
       - stamford
 
