@@ -6,7 +6,7 @@ networks:
 
 services:  
   onboarding:
-    image: ghcr.io/stamford-syntax-club/onboarding-basics:930c6c18baf85ab9e128da7e7de8e52e16d5baf4
+    image: ghcr.io/stamford-syntax-club/onboarding-basics:f6db3a2b4a87076f31d969b3c915d1ddc743615e
     restart: on-failure
     expose:
       - 80
