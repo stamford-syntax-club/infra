@@ -8,7 +8,9 @@ Here are the link for downloading.
 https://www.docker.com/get-started/
 
 # Docker Basic Commands
-1) docker build -t <image_name> . (Builds a image from Dockerfile in current directory.)
+1) ```
+<docker build -t <image_name>>
+```  (Builds a image from Dockerfile in current directory.)
 2) docker run --rm -itd -p 80:5000 <image name> /bin/bash (Runs an
 instance of container with port mapping and bash shell.)
 3) docker ps (Lists all running containers on your system.)
