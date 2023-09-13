@@ -8,25 +8,35 @@ Here are the link for downloading.
 https://www.docker.com/get-started/
 
 # Docker Basic Commands
-1) ```bash
+```bash
  docker build -t <image_name>
  ```
-(Builds a image from Dockerfile in current directory.)
-2) ```bash
+Builds a image from Dockerfile in current directory.
+```bash
 docker run --rm -itd -p 80:5000 <image name>
 ```
-(Runs an instance of container with port mapping and bash shell.)
-3) ```bash
+Runs an instance of container with port mapping and bash shell.
+```bash
  docker ps
  ```
-(Lists all running containers on your system.)
-4) ```bash
+Lists all running containers on your system.
+```bash
 docker stop $(docker ps -q)
 ``` 
-(Stops all running instances of containers.)
-5) ```bash
+Stops all running instances of containers.
+```bash
 docker images
-```(List all the local images)
-6) ``` <docker rmi <image id>``` (Remove specific image by its ID number).
-7) ``` <docker rm $(docker ps -aq)>``` (Removes all stopped containers)
-8) ``` <docker image prune> ``` (Remove all the unused image
+```
+List all the local images
+``` bash
+docker rmi <image id>
+``` 
+Remove specific image by its ID number
+ ```bash 
+docker rm $(docker ps -aq)
+``` 
+Removes all stopped containers
+```bash
+docker image prune
+```
+Remove all the unused image
