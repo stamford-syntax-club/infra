@@ -11,32 +11,32 @@ https://www.docker.com/get-started/
 ```bash
  docker build -t <image_name>
  ```
-Builds a image from Dockerfile in current directory.
+1) Builds a image from Dockerfile in current directory.
 ```bash
 docker run --rm -itd -p 80:5000 <image name>
 ```
-Runs an instance of container with port mapping and bash shell.
+2) Runs an instance of container with port mapping and bash shell.
 ```bash
  docker ps
  ```
-Lists all running containers on your system.
+3) Lists all running containers on your system.
 ```bash
 docker stop $(docker ps -q)
 ``` 
-Stops all running instances of containers.
+4) Stops all running instances of containers.
 ```bash
 docker images
 ```
-List all the local images
+5) List all the local images
 ``` bash
 docker rmi <image id>
 ``` 
-Remove specific image by its ID number
+6) Remove specific image by its ID number
  ```bash 
 docker rm $(docker ps -aq)
 ``` 
-Removes all stopped containers
+7) Removes all stopped containers
 ```bash
 docker image prune
 ```
-Remove all the unused image
+8)Remove all the unused image
