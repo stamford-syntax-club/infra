@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    networks:
+      - haproxy_stamford
+
+networks:
+  haproxy_stamford:
+    external: true
