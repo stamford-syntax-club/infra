@@ -45,7 +45,6 @@ Current services offered:
 | PORT  | SERVICE                                       |
 |------:|:---------------------------------------------|
 | 80    | HAProxy                                      |
-| 6379  | Redis
 | 7333  | S3-webdav service (SeaweedFS WebDAV server)  |
 | 8181  | S3-volume service (SeaweedFS Volume server - HTTP API) |
 | 8333  | S3 service (SeaweedFS S3 server)             |
