@@ -14,3 +14,6 @@ docker compose -f onboarding/docker-compose.dev.yaml down
 
 # stop haproxy & destroy stamford network
 docker compose -f haproxy/docker-compose.dev.yaml down
+
+# stop redis
+docker compose -f redis/docker-compose.dev.yaml down
