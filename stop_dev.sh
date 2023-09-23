@@ -12,8 +12,8 @@ docker compose -f prometheus/docker-compose.dev.yaml down
 # stop onboarding docs services
 docker compose -f onboarding/docker-compose.dev.yaml down
 
+# stop redis services
+docker compose -f redis/docker-compose.dev.yaml down -v
+
 # stop haproxy & destroy stamford network
 docker compose -f haproxy/docker-compose.dev.yaml down
-
-# stop redis
-docker compose -f redis/docker-compose.dev.yaml down
