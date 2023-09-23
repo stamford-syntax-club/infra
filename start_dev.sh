@@ -14,3 +14,6 @@ docker compose -f stamfordcenter/docker-compose.dev.yaml up -d
 
 # start onboarding docs services
 docker compose -f onboarding/docker-compose.dev.yaml up -d
+
+# start redis
+docker compose -f redis/docker-compose.dev.yaml up -d
