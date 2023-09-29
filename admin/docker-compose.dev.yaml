@@ -1,0 +1,18 @@
+version: "3"
+
+networks:
+  stamford:
+    external: true
+    name: haproxy_stamford
+
+services:
+  appsmith:
+    image: index.docker.io/appsmith/appsmith-ce
+    container_name: appsmith
+    ports:
+      - "1341:80"
+    volumes:
+      - ./stacks:/appsmith-stacks
+    restart: unless-stopped
+    networks:
+      - stamford
