@@ -9,8 +9,8 @@ services:
     image: chrislusf/seaweedfs
     restart: on-failure
     ports:
-      - 9333:9333 
-      - 19333:19333 
+      - 9333:9333
+      - 19333:19333
       - 9324:9324
     command: "master -ip=s3-master -ip.bind=0.0.0.0  -volumeSizeLimitMB=5 -volumePreallocate=false -metricsPort=9324 -mdir=/data"
     volumes:
@@ -22,9 +22,9 @@ services:
     image: chrislusf/seaweedfs
     restart: on-failure
     ports:
-      - 8181:8181 
-      - 18080:18080 
-      - 9325:9325 
+      - 8181:8181
+      - 18080:18080
+      - 9325:9325
     command: 'volume -mserver="s3-master:9333" -ip.bind=0.0.0.0 -port=8181 -max=0 -metricsPort=9325 -dir=/data'
     depends_on:
       - s3-master
@@ -37,9 +37,9 @@ services:
     image: chrislusf/seaweedfs
     restart: on-failure
     ports:
-      - 8888:8888 
+      - 8888:8888
       - 18888:18888
-      - 9326:9326 
+      - 9326:9326
     command: 'filer -master="s3-master:9333" -ip.bind=0.0.0.0 -metricsPort=9326 -defaultStoreDir=/data'
     tty: true
     stdin_open: true
@@ -55,9 +55,11 @@ services:
     image: chrislusf/seaweedfs
     restart: on-failure
     ports:
-      - 8333:8333 
-      - 9327:9327 
-    command: 's3 -filer="s3-filer:8888" -ip.bind=0.0.0.0 -metricsPort=9327'
+      - 8333:8333
+      - 9327:9327
+    command: 's3 -config=/conf/config.json -filer="s3-filer:8888" -ip.bind=0.0.0.0 -metricsPort=9327'
+    volumes:
+      - ./config.json:/conf/config.json
     depends_on:
       - s3-master
       - s3-volume
