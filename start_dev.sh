@@ -20,3 +20,6 @@ docker compose -f redis/docker-compose.dev.yaml up -d
 
 # start admin services
 docker compose -f admin/docker-compose.dev.yaml up -d
+
+# start portainer services
+docker compose -f portainer/docker-compose.yaml up -d

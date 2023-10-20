@@ -60,6 +60,7 @@ Current services offered:
 | ----: | :--------------------------------------------------------------- |
 |    80 | HAProxy                                                          |
 |  1341 | Appsmith                                                         |
+|  1342 | Portainer UI                                                     |
 |  7333 | S3-webdav service (SeaweedFS WebDAV server)                      |
 |  8181 | S3-volume service (SeaweedFS Volume server - HTTP API)           |
 |  8333 | S3 service (SeaweedFS S3 server)                                 |

@@ -18,5 +18,8 @@ docker compose -f admin/docker-compose.dev.yaml down -v
 # stop redis services
 docker compose -f redis/docker-compose.dev.yaml down -v
 
+# stop portainer services
+docker compose -f portainer/docker-compose.yaml down -v
+
 # stop haproxy & destroy stamford network
 docker compose -f haproxy/docker-compose.dev.yaml down -v
