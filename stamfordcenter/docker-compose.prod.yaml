@@ -10,9 +10,7 @@ services:
     restart: always
     networks:
       - stamford
-    environment:
-      - NODE_ENV=beta
-
+      
   backend:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:f619ad1f272f9bf8f04936d15a55dcc0c66f1fd3
     networks:
@@ -26,4 +24,3 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_REGION=${AWS_REGION}
-      - NODE_ENV=beta
