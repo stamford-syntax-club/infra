@@ -12,6 +12,9 @@ docker compose -f prometheus/docker-compose.yaml down -v
 # stop redis services
 docker compose -f redis/docker-compose.yaml down -v
 
+# stop admin services
+docker compose -f admin/docker-compose.yaml down -v
+
 # stop portainer services
 docker compose -f portainer/docker-compose.yaml down -v
 

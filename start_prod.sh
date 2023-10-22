@@ -16,7 +16,7 @@ docker compose -f stamfordcenter/docker-compose.prod.yaml up -d
 docker compose -f redis/docker-compose.yaml up -d
 
 # start admin services
-docker compose -f admin/docker-compose.prod.yaml up -d
+docker compose -f admin/docker-compose.yaml up -d
 
 # start onboarding services
 docker compose -f onboarding/docker-compose.prod.yaml up -d

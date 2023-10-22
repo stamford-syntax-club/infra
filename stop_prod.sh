@@ -13,7 +13,7 @@ docker compose -f prometheus/docker-compose.yaml down -v
 docker compose -f redis/docker-compose.yaml down -v
 
 # stop admin services
-docker compose -f admin/docker-compose.prod.yaml down -v
+docker compose -f admin/docker-compose.yaml down -v
 
 # stop onboarding services
 docker compose -f onboarding/docker-compose.prod.yaml down -v
