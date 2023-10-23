@@ -4,12 +4,33 @@ on:
   push:
     branches:
       - "main"
-
+      
 jobs:
   deploy-to-vm:
     name: Deploy new changes to VM
+    strategy:
+      matrix:
+        environment:
+          - 'beta'
+          - 'production'
+
     runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
     steps:
+      - name: Test Deployment Configurations
+        run: |
+          if [[ ${{ matrix.environment }} == 'beta' && ${{ vars.TEST }} == 'SyntaxBeta' ]]; then
+            echo "Beta Environment Configured"
+          elif [[ ${{ matrix.environment }} == 'production' && ${{ vars.TEST }} == 'SyntaxProduction' ]]; then
+            echo "Production Environment Configured"
+          else
+            echo "Unsupported environment: ${{ matrix.environment }}"
+            exit 1
+          fi
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Deploy new changes via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -20,4 +41,9 @@ jobs:
             cd infra
             git fetch origin
             git pull origin main
-            ./start_dev.sh
+
+            if [[ ${{ matrix.environment }} == 'beta' ]]; then
+              ./start_dev.sh
+            elif [[ ${{ matrix.environment }} == 'production' ]]; then
+              ./start_prod.sh
+            fi
