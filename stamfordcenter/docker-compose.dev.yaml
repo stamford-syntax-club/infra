@@ -6,7 +6,7 @@ networks:
 
 services:
   frontend:
-    image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:d1e5b289a88027a4bedf0c3d7e8efc8d72fe6660
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:4a0907c6a444a0d46e63e394c531b0439bb3185a
     restart: always
     networks:
       - stamford
