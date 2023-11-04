@@ -24,6 +24,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
-          title: "[AUTOMATIC] - Deployment Request from ${{ github.event.pusher.name }}"
-          assignee: ${{ github.event.pusher.name }}
+          title: "[AUTOMATIC] - Deployment Request from ${{ github.event.inputs.name }}"
+          assignee: ${{ github.event.inputs.name }}
           reviewer: chinathaip
