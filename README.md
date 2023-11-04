@@ -69,10 +69,7 @@ Current services offered:
 |  9000 | Prometheus service                                               |
 |  9093 | AlertManager service                                             |
 |  9094 | Discord-Alert service (Internal)                                 |
-|  9324 | S3-master service (SeaweedFS Master server - Prometheus metrics) |
 |  9325 | S3-volume service (SeaweedFS Volume server - Prometheus metrics) |
-|  9326 | S3-filer service (SeaweedFS Filer server - Prometheus metrics)   |
-|  9327 | S3 service (SeaweedFS S3 server - Prometheus metrics)            |
 |  9333 | S3-master service (SeaweedFS Master server - HTTP API)           |
 | 18080 | S3-volume service (SeaweedFS Volume server - gRPC communication) |
 | 18888 | S3-filer service (SeaweedFS Filer server - gRPC communication)   |
