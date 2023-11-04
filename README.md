@@ -64,6 +64,7 @@ Current services offered:
 |  7333 | S3-webdav service (SeaweedFS WebDAV server)                      |
 |  8181 | S3-volume service (SeaweedFS Volume server - HTTP API)           |
 |  8333 | S3 service (SeaweedFS S3 server)                                 |
+|  8404 | HAProxy Prometheus Port                                          | 
 |  8888 | S3-filer service (SeaweedFS Filer server - HTTP API)             |
 |  9000 | Prometheus service                                               |
 |  9093 | AlertManager service                                             |

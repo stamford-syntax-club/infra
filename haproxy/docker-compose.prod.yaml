@@ -10,6 +10,7 @@ services:
     ports:
       - 443:443
       - 80:80
+      - 8404:8404
     volumes:
       - ./haproxy.prod.cfg:/usr/local/etc/haproxy/haproxy.cfg
     networks:
