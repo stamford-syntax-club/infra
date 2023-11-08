@@ -14,7 +14,7 @@ services:
       - APP_ENV=beta
 
   backend:
-    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:7aae6f168529fe20fbab4220ff2957ad0e14fd13
+    image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:0bd736e5baa991ab6d973282bac33695184c051d
     networks:
       - stamford
     ports:
