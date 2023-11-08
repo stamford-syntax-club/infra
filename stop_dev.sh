@@ -6,8 +6,8 @@ docker compose -f stamfordcenter/docker-compose.dev.yaml down -v
 # stop s3 storage services
 docker compose -f s3/docker-compose.yaml down -v 
 
-# stop prometheus services
-docker compose -f prometheus/docker-compose.yaml down -v
+# stop monitoring services
+docker compose -f monitoring/docker-compose.yaml down -v
 
 # stop redis services
 docker compose -f redis/docker-compose.yaml down -v
