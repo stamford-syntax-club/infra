@@ -21,6 +21,7 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
+    user: "0" # admin permission for rewrite var/lib/grafana
     volumes:
       - ./conf/grafana/provisioning:/etc/grafana/provisioning 
       - ./conf/grafana/data:/var/lib/grafana
