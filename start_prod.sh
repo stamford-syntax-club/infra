@@ -6,8 +6,8 @@ docker compose -f haproxy/docker-compose.prod.yaml up -d
 # start s3 storage services
 docker compose -f s3/docker-compose.yaml up -d
 
-# start prometheus services
-docker compose -f prometheus/docker-compose.yaml up -d
+# start monitoring services
+docker compose -f monitoring/docker-compose.yaml up -d
 
 # start stamford center services (run .prod file)
 docker compose -f stamfordcenter/docker-compose.prod.yaml up -d

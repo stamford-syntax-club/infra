@@ -4,17 +4,29 @@ networks:
     external: true
     name: haproxy_stamford
 
-services:  
+services:
   prometheus:
-      image: prom/prometheus
-      restart: on-failure
-      ports:
-        - 9000:9090
-      volumes:
-        - ./conf:/etc/prometheus
-      command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
-      networks:
-        - stamford
+    image: prom/prometheus
+    restart: on-failure
+    ports:
+      - 9000:9090
+    volumes:
+      - ./conf:/etc/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - stamford
+
+  grafana:
+    image: grafana/grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./conf/grafana/provisioning:/etc/grafana/provisioning 
+    depends_on:
+      - prometheus
+    networks:
+      - stamford
 
   alertmanager:
     image: prom/alertmanager
@@ -24,6 +36,8 @@ services:
     command: --config.file=/etc/prometheus/alertmanager.yml
     ports:
       - 9093:9093
+    depends_on:
+      - prometheus
     networks:
       - stamford
 
@@ -32,5 +46,7 @@ services:
     restart: on-failure
     environment:
       - DISCORD_WEBHOOK=${DISCORD_WEBHOOK_URL}
+    depends_on:
+      - prometheus
     networks:
-        - stamford
+      - stamford
