@@ -1,0 +1,33 @@
+version: "3.8"
+networks:
+  course-compose:
+  stamford:
+    external: true
+    name: haproxy_stamford
+
+services:
+  api-gateway:
+    image: ghcr.io/stamford-syntax-club/course-compose:api-gateway-24b8d8b10dfdb7b49742c3e55d113bf1efcbbf0f
+    volumes:
+      - ./syntax-config.yaml:/app/syntax-config.yaml
+    ports:
+      - 8000:8000
+    networks:
+      - stamford # receive traffic from HAProxy
+      - course-compose # send traffic to corresponding services
+
+
+  course-api:
+    image: ghcr.io/stamford-syntax-club/course-compose:course-api-cf701472d46d953b0f751ccab1f953a893c88989
+    volumes:
+      - ./.env.beta:/app/.env
+    networks:
+      - stamford
+      - course-compose
+
+  reviews-api:
+    image: ghcr.io/stamford-syntax-club/course-compose:reviews-api-04feb6394e1f72d255d24eac31a85eee323fe77f
+    volumes:
+      - ./.env.beta:/app/.env.beta
+    networks:
+      - course-compose
