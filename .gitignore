@@ -1,6 +1,6 @@
 **/data
 .DS_Store
-*/.env
+*/.env**
 admin/stacks
 s3/config.json
 */.env.*
