@@ -3,6 +3,9 @@ networks:
   stamford:
     external: true
     name: haproxy_stamford
+  redis_internal:
+    external: true
+    name: redis_internal
 
 services:
   frontend:
@@ -17,6 +20,7 @@ services:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:8400c90041e45a4d03a64219306b7e7613352c5e
     networks:
       - stamford
+      - redis_internal
     ports:
       - 8080:${PORT}
     environment:

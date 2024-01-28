@@ -4,6 +4,9 @@ networks:
   stamford:
     external: true
     name: haproxy_stamford
+  redis_internal:
+    external: true
+    name: redis_internal
 
 services:
   api-gateway:
@@ -22,7 +25,7 @@ services:
     volumes:
       - ./.env.beta:/app/.env
     networks:
-      - stamford
+      - redis_internal
       - course-compose
 
   reviews-api:
@@ -30,4 +33,5 @@ services:
     volumes:
       - ./.env.beta:/app/.env.beta
     networks:
+      - redis_internal
       - course-compose
