@@ -10,7 +10,7 @@ routes:
       method: GET
       destination:
           service: get_course_info
-          endpoint: http://localhost:8002/courses/:courseCode
+          endpoint: http://course-api:8002/api/courses/:courseCode
 
     - path: /api/courses/:courseCode/reviews
       method: GET
@@ -18,3 +18,9 @@ routes:
           service: get_course_reviews
           endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
           is_array: true
+
+    - path: /api/courses/:courseCode/reviews
+      method: POST
+      destination:
+          service: submit_new_review
+          endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
