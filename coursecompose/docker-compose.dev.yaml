@@ -10,7 +10,7 @@ networks:
 
 services:
   api-gateway:
-    image: ghcr.io/stamford-syntax-club/course-compose:api-gateway-24b8d8b10dfdb7b49742c3e55d113bf1efcbbf0f
+    image: ghcr.io/stamford-syntax-club/course-compose:api-gateway-eaa804d996fed484b4ef8af17f17fa07da0a8e2c
     container_name: compose_api_gateway 
     restart: always
     volumes:
@@ -23,7 +23,7 @@ services:
 
 
   course-api:
-    image: ghcr.io/stamford-syntax-club/course-compose:course-api-cf701472d46d953b0f751ccab1f953a893c88989
+    image: ghcr.io/stamford-syntax-club/course-compose:course-api-516dbc444cfcea8860b8fe70cb42a3e2571d4f8b
     container_name: compose_api_course
     restart: always
     volumes:
@@ -33,7 +33,7 @@ services:
       - course-compose
 
   reviews-api:
-    image: ghcr.io/stamford-syntax-club/course-compose:reviews-api-04feb6394e1f72d255d24eac31a85eee323fe77f
+    image: ghcr.io/stamford-syntax-club/course-compose:reviews-api-4e11782b8bfb1bd734aabc4601e558d76aea4cbe 
     container_name: compose_api_review
     restart: always
     volumes:
