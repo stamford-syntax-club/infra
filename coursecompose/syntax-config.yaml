@@ -1,26 +1,32 @@
 routes:
-    - path: /api/courses
-      method: GET
-      destination:
-          service: list_all_courses
-          endpoint: http://course-api:8002/api/courses
-          is_array: true
+  - path: /api/courses
+    method: GET
+    destination:
+      service: list_all_courses
+      endpoint: http://course-api:8002/api/courses
+      is_array: true
 
-    - path: /api/courses/:courseCode
-      method: GET
-      destination:
-          service: get_course_info
-          endpoint: http://course-api:8002/api/courses/:courseCode
+  - path: /api/courses/:courseCode
+    method: GET
+    destination:
+      service: get_course_info
+      endpoint: http://course-api:8002/api/courses/:courseCode
 
-    - path: /api/courses/:courseCode/reviews
-      method: GET
-      destination:
-          service: get_course_reviews
-          endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
-          is_array: true
+  - path: /api/courses/:courseCode/reviews
+    method: GET
+    destination:
+      service: get_course_reviews
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
+      is_array: true
 
-    - path: /api/courses/:courseCode/reviews
-      method: POST
-      destination:
-          service: submit_new_review
-          endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
+  - path: /api/courses/:courseCode/reviews
+    method: POST
+    destination:
+      service: submit_new_review
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
+
+  - path: /api/courses/:courseCode/reviews/:reviewId
+    method: DELETE
+    destination:
+      service: submit_new_review
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews/:reviewId
