@@ -13,8 +13,6 @@ services:
     image: chinathaip/compose-web:beta
     container_name: compose_web
     restart: always
-    ports:
-      - 3000:3000
     networks:
       - stamford
       - course-compose
@@ -25,10 +23,7 @@ services:
     restart: always
     volumes:
       - ./syntax-config.yaml:/app/syntax-config.yaml
-    ports:
-      - 8000:8000
     networks:
-      - stamford # receive traffic from HAProxy
       - course-compose # send traffic to corresponding services
 
   course-api:
