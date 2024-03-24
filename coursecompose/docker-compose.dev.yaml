@@ -10,7 +10,7 @@ networks:
 
 services:
   web:
-    image: chinathaip/compose-web:beta
+    image: chinathaip/compose-web:beta-v2
     container_name: compose_web
     restart: always
     networks:
@@ -24,6 +24,7 @@ services:
     volumes:
       - ./syntax-config.yaml:/app/syntax-config.yaml
     networks:
+      - stamford # receive traffic from HAProxy
       - course-compose # send traffic to corresponding services
 
   course-api:
