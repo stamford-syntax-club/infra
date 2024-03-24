@@ -29,7 +29,7 @@ routes:
     method: PUT
     destination:
       service: edit_review
-      endpoint: http://localhost:8003/api/courses/:courseCode/reviews/edit
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews/edit
 
   - path: /api/courses/:courseCode/reviews/:reviewId
     method: DELETE
