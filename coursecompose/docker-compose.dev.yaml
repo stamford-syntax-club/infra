@@ -9,6 +9,16 @@ networks:
     name: redis_internal
 
 services:
+  web:
+    image: chinathaip/compose-web:beta
+    container_name: compose_web
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - stamford
+      - course-compose
+
   api-gateway:
     image: ghcr.io/stamford-syntax-club/course-compose:api-gateway-294ba41b8e406651edc32dae9e53ff32aa83880b
     container_name: compose_api_gateway
@@ -26,8 +36,8 @@ services:
     container_name: compose_api_course
     restart: always
     volumes:
-      #      - ./.env.beta:/app/.env
-      - ./.env.development:/app/.env
+      - ./.env.beta:/app/.env
+      #- ./.env.development:/app/.env
     networks:
       - redis_internal
       - course-compose
@@ -37,8 +47,8 @@ services:
     container_name: compose_api_review
     restart: always
     volumes:
-      #      - ./.env.beta:/app/.env.beta
-      - ./.env.development:/app/.env.development
+      - ./.env.beta:/app/.env.beta
+      #- ./.env.development:/app/.env.development
     networks:
       - redis_internal
       - course-compose
