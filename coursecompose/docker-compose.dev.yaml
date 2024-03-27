@@ -1,0 +1,61 @@
+version: "3.8"
+networks:
+  course-compose:
+  stamford:
+    external: true
+    name: haproxy_stamford
+  redis_internal:
+    external: true
+    name: redis_internal
+
+services:
+  web:
+    image: chinathaip/compose-web:pr
+    container_name: compose_web
+    restart: always
+    networks:
+      - stamford
+      - course-compose
+
+  api-gateway:
+    image: ghcr.io/stamford-syntax-club/course-compose:api-gateway-294ba41b8e406651edc32dae9e53ff32aa83880b
+    container_name: compose_api_gateway
+    restart: always
+    volumes:
+      - ./syntax-config.yaml:/app/syntax-config.yaml
+    networks:
+      - stamford # receive traffic from HAProxy
+      - course-compose # send traffic to corresponding services
+
+  course-api:
+    image: ghcr.io/stamford-syntax-club/course-compose:course-api-294ba41b8e406651edc32dae9e53ff32aa83880b
+    container_name: compose_api_course
+    restart: always
+    volumes:
+      - ./.env.beta:/app/.env
+      #- ./.env.development:/app/.env
+    networks:
+      - redis_internal
+      - course-compose
+
+  reviews-api:
+    image: ghcr.io/stamford-syntax-club/course-compose:reviews-api-294ba41b8e406651edc32dae9e53ff32aa83880b
+    container_name: compose_api_review
+    restart: always
+    volumes:
+      - ./.env.beta:/app/.env.beta
+      #- ./.env.development:/app/.env.development
+    networks:
+      - redis_internal
+      - course-compose
+
+        #  user-api:
+        #    image: user-api
+        #    container_name: compose_api_user
+        #    restart: always
+        #    volumes:
+        #      - ./.env.development:/app/.env
+        #    ports:
+        #      - 8004:8004
+        #    networks:
+        #      - course-compose
