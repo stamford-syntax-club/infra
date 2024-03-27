@@ -10,7 +10,7 @@ networks:
 
 services:
   web:
-    image: chinathaip/compose-web:beta-v2
+    image: chinathaip/compose-web:pr
     container_name: compose_web
     restart: always
     networks:
