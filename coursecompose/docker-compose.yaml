@@ -41,8 +41,7 @@ services:
       - course-compose
 
   reviews-api:
-    #    image: ghcr.io/stamford-syntax-club/course-compose/reviews-api:0f6a050f6294845ea30f263aa20f1a48bc63e073
-    image: review:kafka
+    image: ghcr.io/stamford-syntax-club/course-compose/reviews-api:0f6a050f6294845ea30f263aa20f1a48bc63e073
     container_name: compose_api_review
     restart: always
     volumes:
