@@ -3,4 +3,4 @@
 */.env
 admin/stacks
 s3/config.json
-*/.env.beta
+*/.env.*
