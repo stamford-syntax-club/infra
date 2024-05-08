@@ -1,0 +1,44 @@
+routes:
+  - path: /api/courses
+    method: GET
+    destination:
+      service: list_all_courses
+      endpoint: http://course-api:8002/api/courses
+      is_array: true
+
+  - path: /api/courses/:courseCode
+    method: GET
+    destination:
+      service: get_course_info
+      endpoint: http://course-api:8002/api/courses/:courseCode
+
+  - path: /api/courses/:courseCode/reviews
+    method: GET
+    destination:
+      service: get_course_reviews
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
+      is_array: true
+
+  - path: /api/courses/:courseCode/reviews
+    method: POST
+    destination:
+      service: submit_new_review
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews
+
+  - path: /api/courses/:courseCode/reviews/edit
+    method: PUT
+    destination:
+      service: edit_review
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews/edit
+
+  - path: /api/courses/:courseCode/reviews/:reviewId
+    method: DELETE
+    destination:
+      service: submit_new_review
+      endpoint: http://reviews-api:8003/api/courses/:courseCode/reviews/:reviewId
+
+  - path: /api/myreviews
+    method: GET
+    destination:
+      service: get_my_reviews
+      endpoint: http://reviews-api:8003/api/myreviews

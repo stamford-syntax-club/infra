@@ -1,0 +1,63 @@
+version: "3.8"
+networks:
+  course-compose:
+  stamford:
+    external: true
+    name: haproxy_stamford
+  redis_internal:
+    external: true
+    name: redis_internal
+  kafka_queue:
+    external: true
+    name: kafka_kafka_queue
+
+services:
+  web:
+    image: ghcr.io/stamford-syntax-club/course-compose/web:329bea8d0830bb0ba9ef28cfe7aa1e58f436fc00
+    container_name: compose_web
+    restart: always
+    networks:
+      - stamford
+      - course-compose
+
+  api-gateway:
+    image: ghcr.io/stamford-syntax-club/course-compose/api-gateway:0f6a050f6294845ea30f263aa20f1a48bc63e073
+    container_name: compose_api_gateway
+    restart: always
+    volumes:
+      - ./syntax-config.yaml:/app/syntax-config.yaml
+    networks:
+      - stamford # receive traffic from HAProxy
+      - course-compose # send traffic to corresponding services
+
+  course-api:
+    image: ghcr.io/stamford-syntax-club/course-compose/course-api:0f6a050f6294845ea30f263aa20f1a48bc63e073
+    container_name: compose_api_course
+    restart: always
+    volumes:
+      - ./.env.beta:/app/.env
+    networks:
+      - redis_internal
+      - course-compose
+
+  reviews-api:
+    image: ghcr.io/stamford-syntax-club/course-compose/reviews-api:0f6a050f6294845ea30f263aa20f1a48bc63e073
+    container_name: compose_api_review
+    restart: always
+    volumes:
+      - ./.env.beta:/app/.env.beta
+    networks:
+      - redis_internal
+      - stamford # for HAProxy
+      - course-compose
+      - kafka_queue
+
+  ramune:
+    image: ghcr.io/stamford-syntax-club/course-compose/ramune:prod-pre-release
+    container_name: compose_ramune
+    restart: always
+    volumes:
+      - ./.env.beta:/usr/src/app/.env
+    networks:
+      - course-compose
+      - kafka_queue

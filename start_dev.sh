@@ -20,3 +20,9 @@ docker compose -f redis/docker-compose.yaml up -d
 
 # start portainer services
 docker compose -f portainer/docker-compose.yaml up -d
+
+# start kafka services
+docker compose -f kafka/docker-compose.yaml up -d
+
+# start course compose services
+docker compose -f coursecompose/docker-compose.dev.yaml up -d
