@@ -51,3 +51,13 @@ services:
       - stamford # for HAProxy
       - course-compose
       - kafka_queue
+
+  ramune:
+    image: ghcr.io/stamford-syntax-club/course-compose/ramune:prod-pre-release
+    container_name: compose_ramune
+    restart: always
+    volumes:
+      - ./.env.beta:/usr/src/app/.env
+    networks:
+      - course-compose
+      - kafka_queue

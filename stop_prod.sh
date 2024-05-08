@@ -21,11 +21,11 @@ docker compose -f onboarding/docker-compose.prod.yaml down -v
 # stop portainer services
 docker compose -f portainer/docker-compose.yaml down -v
 
+# start course compose services
+docker compose -f coursecompose/docker-compose.prod.yaml down -v 
+
 # stop haproxy & destroy stamford network
 docker compose -f haproxy/docker-compose.prod.yaml down -v
 
 # start kafka services
 docker compose -f kafka/docker-compose.yaml down -v 
-
-# start course compose services
-docker compose -f coursecompose/docker-compose.prod.yaml down -v 
