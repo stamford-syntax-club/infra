@@ -21,7 +21,7 @@ services:
       - course-compose
 
   api-gateway:
-    image: ghcr.io/stamford-syntax-club/course-compose/api-gateway:prod-0f6a050f6294845ea30f263aa20f1a48bc63e073
+    image: ghcr.io/stamford-syntax-club/course-compose/api-gateway:prod-test-gitops
     container_name: compose_api_gateway
     restart: always
     volumes:
