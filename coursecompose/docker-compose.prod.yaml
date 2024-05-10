@@ -31,7 +31,7 @@ services:
       - course-compose # send traffic to corresponding services
 
   course-api:
-    image: ghcr.io/stamford-syntax-club/course-compose/course-api:prod-0f6a050f6294845ea30f263aa20f1a48bc63e073
+    image: ghcr.io/stamford-syntax-club/course-compose/course-api:prod-0e0b8b9427128c9bb54b35c4dcd7f1ca8c4f9905
     container_name: compose_api_course
     restart: always
     volumes:
