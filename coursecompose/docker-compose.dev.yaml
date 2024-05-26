@@ -13,7 +13,7 @@ networks:
 
 services:
   web:
-    image: ghcr.io/stamford-syntax-club/course-compose/web:6c1b957c8e6710e95bbaff84e87dcfe5206e8de5
+    image: ghcr.io/stamford-syntax-club/course-compose/web:dbb1dcc134ab68e83d51e503f0d647af764e7267
     container_name: compose_web
     restart: always
     networks:
