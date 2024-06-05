@@ -6,6 +6,7 @@ networks:
 services:
   haproxy:
     image: haproxy
+    container_name: haproxy
     restart: always
     ports:
       - 443:443

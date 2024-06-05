@@ -3,10 +3,14 @@ networks:
   stamford:
     external: true
     name: haproxy_stamford
+  redis_internal:
+    external: true
+    name: redis_internal
 
 services:
   frontend:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-frontend:b496e7830c0acb0aa8d55d98773268d532f649e3
+    container_name: center-fe
     restart: always
     networks:
       - stamford
@@ -15,14 +19,18 @@ services:
 
   backend:
     image: ghcr.io/stamford-syntax-club/stamfordcenter-backend:8400c90041e45a4d03a64219306b7e7613352c5e
+    container_name: center-be
+    restart: always
     networks:
       - stamford
+      - redis_internal
     ports:
       - 8080:${PORT}
     environment:
       - PORT=${PORT}
       - S3_ENDPOINT=${S3_ENDPOINT}
       - MONGODB_URI=${MONGODB_URI}
+      - REDIS_URL=${REDIS_URL}
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_REGION=${AWS_REGION}
